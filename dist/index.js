@@ -9829,6 +9829,8 @@ async function run() {
 
     const [owner, repo] = core.getInput("repository").split("/");
 
+    console.log('XXX', core.getInput("issue-number"));
+
     if (duplicatedKeys.length > 0) {
       const sb = [];
       sb.push('❌ PR contains duplicated i18n keys');
