@@ -24,7 +24,7 @@ async function run() {
     const flatten = flattenJSON(JSON.parse(content));
     const obj2 = {};
     const keys = Object.keys(flatten);
-
+    console.log('OK1')
     for (let i = 0; i < keys.length; i++) {
       const k = keys[i];
       const v = flatten[k];
@@ -34,6 +34,7 @@ async function run() {
         obj2[v].push(k);
       }
     }
+    console.log('OK2');
     const duplicatedKeys = [];
     const keys2 = Object.keys(obj2);
     for (let i = 0; i < keys2.length; i++) {
@@ -59,7 +60,6 @@ async function run() {
         body: "",
         repo,
         owner,
-        issue_number: Number(core.getInput("issue-number")),
       });
       core.setFailed("PR contains duplicated i18n keys");
     } else {
