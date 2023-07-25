@@ -9838,7 +9838,7 @@ async function run() {
       sb.push(duplicatedKeys.join('\n'))
       sb.push('```')
       octokit.rest.issues.createComment({
-        body: "",
+        body: sb.join('\n'),
         repo,
         owner,
         issue_number: Number(core.getInput("issue-number")),
