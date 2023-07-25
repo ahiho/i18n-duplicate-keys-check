@@ -9803,7 +9803,6 @@ async function run() {
     const flatten = flattenJSON(JSON.parse(content));
     const obj2 = {};
     const keys = Object.keys(flatten);
-    console.log('OK1')
     for (let i = 0; i < keys.length; i++) {
       const k = keys[i];
       const v = flatten[k];
@@ -9813,7 +9812,6 @@ async function run() {
         obj2[v].push(k);
       }
     }
-    console.log('OK2');
     const duplicatedKeys = [];
     const keys2 = Object.keys(obj2);
     for (let i = 0; i < keys2.length; i++) {
@@ -9828,8 +9826,6 @@ async function run() {
     const octokit = github.getOctokit(token);
 
     const [owner, repo] = core.getInput("repository").split("/");
-
-    console.log('XXX', core.getInput("issue-number"));
 
     if (duplicatedKeys.length > 0) {
       const sb = [];
