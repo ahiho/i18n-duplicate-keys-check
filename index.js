@@ -60,6 +60,7 @@ async function run() {
         body: "",
         repo,
         owner,
+        issue_number: Number(core.getInput("issue-number")),
       });
       core.setFailed("PR contains duplicated i18n keys");
     } else {
