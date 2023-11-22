@@ -33091,7 +33091,7 @@ async function run() {
     const flatten = flattenJSON(JSON.parse(content));
     const obj2 = {};
     const keys = Object.keys(flatten);
-    console.log("Keys", keys);
+    core.info("Keys ", keys);
     for (const element of keys) {
       const k = element;
       const v = flatten[k];
@@ -33102,7 +33102,7 @@ async function run() {
       }
     }
 
-    console.log("Ob2", obj2);
+    core.info("Ob2 ", obj2);
 
     const duplicatedKeys = [];
     const keys2 = Object.keys(obj2);
