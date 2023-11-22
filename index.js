@@ -24,8 +24,9 @@ async function run() {
     const flatten = flattenJSON(JSON.parse(content));
     const obj2 = {};
     const keys = Object.keys(flatten);
-    for (let i = 0; i < keys.length; i++) {
-      const k = keys[i];
+    console.log("Keys", keys);
+    for (const element of keys) {
+      const k = element;
       const v = flatten[k];
       if (!obj2[v]) {
         obj2[v] = [k];
@@ -33,13 +34,15 @@ async function run() {
         obj2[v].push(k);
       }
     }
+
+    console.log("Ob2", obj2);
+
     const duplicatedKeys = [];
     const keys2 = Object.keys(obj2);
-    for (let i = 0; i < keys2.length; i++) {
-      const k = keys2[i];
+    for (const element of keys2) {
+      const k = element;
       const v = obj2[k];
       if (v.length > 1) {
-        // obj3[v.join(", ")] = k;
         duplicatedKeys.push("- " + v.join(", "));
       }
     }
@@ -50,19 +53,19 @@ async function run() {
 
     if (duplicatedKeys.length > 0) {
       const sb = [];
-      sb.push('❌ PR contains duplicated i18n keys');
-      sb.push('```')
-      sb.push(duplicatedKeys.join('\n'))
-      sb.push('```')
+      sb.push("❌ PR contains duplicated i18n keys");
+      sb.push("```");
+      sb.push(duplicatedKeys.join("\n"));
+      sb.push("```");
       octokit.rest.issues.createComment({
-        body: sb.join('\n'),
+        body: sb.join("\n"),
         repo,
         owner,
         issue_number: Number(core.getInput("issue-number")),
       });
       core.setFailed("PR contains duplicated i18n keys");
     } else {
-      console.log('Done! No duplicated i18n strings')
+      console.log("Done! No duplicated i18n strings");
     }
   } catch (error) {
     core.setFailed(error.message);
